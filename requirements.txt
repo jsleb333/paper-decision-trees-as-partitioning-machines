@@ -1,0 +1,10 @@
+numpy
+scipy
+sympy
+sklearn
+python2latex==0.3.0
+xlrd
+git+https://github.com/GRAAL-Research/graal-utils
+pandas
+seaborn
+colorama
