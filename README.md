@@ -9,7 +9,7 @@ To install requirements, run the following command
 ```
 pip install -r requirements.txt
 ```
-The code was written to run on Python 3.6 or in a more recent version.
+The code was written to run in Python 3.6 or in a more recent version.
 
 ## Running the experiments
 
