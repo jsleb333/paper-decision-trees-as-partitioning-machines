@@ -1,7 +1,7 @@
-# Partitioning Machines: A framework to characterize the generalization properties of decision trees
+# Decision trees as partitioning machines to characterize their generalization properties
 
 ## Preface
-This package provides an implementation of the algorithms presented in the paper "Decision trees as partitioning machines to characterize their generalization properties".
+This package provides an implementation of the algorithms presented in the NeurIPS 2020 paper "Decision trees as partitioning machines to characterize their generalization properties" by Leboeuf, LeBland and Marchand.
 
 ## Requirements
 
@@ -9,7 +9,7 @@ To install requirements, run the following command
 ```
 pip install -r requirements.txt
 ```
-The code was written to run on Python 3.6 or higher.
+The code was written to run on Python 3.6 or in a more recent version.
 
 ## Running the experiments
 
@@ -50,6 +50,8 @@ These scripts will generate the LaTeX code to produce the tables and will try to
 
 This package provides implementations of the algorithms that computes an upper and lower bound on the VC dimension of binary decision trees, as well as other useful tools to work with scikit-learn decision trees.
 The package also provides an implementation in pure Python of a decision tree classifier based on the CART algorithm, and everything needed to prune using CART or our bound-based pruning algorithm. The `experiments` folder contains all the files necessary to reproduce experiments and results.
+
+The directory `partitioning_machines` contains all files related to the implementation of the algorithms presented or used in the paper with unit tests in the directory `tests`, while the directory `experiments` contains the files to reproduce the results and the tables of the paper.
 
 ### Detailled content
 #### `partitioning_machines` module
