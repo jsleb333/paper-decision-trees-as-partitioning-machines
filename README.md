@@ -1,7 +1,7 @@
 # Decision trees as partitioning machines to characterize their generalization properties
 
 <p>
-<img src="https://github.com/jsleb333/paper-decision-trees-as-partitioning-machines/blob/assets/thumbnail.png" alt="">
+<img src="https://github.com/jsleb333/paper-decision-trees-as-partitioning-machines/blob/master/assets/thumbnail.png?raw=true" alt="">
 </p>
 
 ## Preface
