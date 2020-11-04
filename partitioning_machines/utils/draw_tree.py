@@ -69,7 +69,7 @@ def tree_struct_to_tikz(tree, min_node_distance=1.3, level_distance=1.6, node_si
     pic = p2l.TexEnvironment('tikzpicture')
     pic.options += f"""leaf/.style={{draw, diamond, minimum width={node_size}cm, minimum height={2*node_size}cm, inner sep=0pt}}""",
     pic.options += f"""internal/.style={{draw, circle, minimum width={node_size}cm, inner sep=0pt}}""",
-    
+
     compute_nodes_position(tree)
 
     for node, subtree in enumerate(tree):
@@ -100,6 +100,7 @@ def decision_tree_to_tikz(decision_tree,
                           label_color_palette=None,
                           node_size=.6,
                           show_rule=True,
+                          feature_names=None,
                           show_impurity=False,
                           show_n_examples_by_label=False):
     pic = p2l.TexEnvironment('tikzpicture')
@@ -108,16 +109,16 @@ def decision_tree_to_tikz(decision_tree,
 
     if label_color_palette is None and sns is not None:
         label_color_palette = sns.color_palette(n_colors=len(classes))
-    
+
     if label_color_palette is not None:
         colors = [p2l.Color(*color) for color in label_color_palette]
         for color in colors:
             pic.preamble.extend(color.preamble)
     else:
         colors = []
-        
+
     compute_nodes_position(decision_tree.tree)
-    
+
     for node, subtree in enumerate(decision_tree.tree):
         if subtree.is_leaf():
             style = 'leaf'
@@ -125,21 +126,21 @@ def decision_tree_to_tikz(decision_tree,
             if colors:
                 style += f', fill={colors[leaf_label]}'
             node_label = str(subtree.n_examples)
-            # node_label = str(int(np.max(subtree.n_examples_by_label)))
         else:
             style = 'internal'
             node_label = []
             if show_rule:
-                node_label.append(f'$x_{subtree.rule_feature} \le {subtree.rule_threshold:.2f}$')
+                feat = f"x_{{{subtree.rule_feature}}}" if feature_names is None else f"\textrm{{{feature_names[subtree.rule_feature]}}}"
+                node_label.append(f'${feat} \le {subtree.rule_threshold:.2f}$')
             if show_impurity:
                 node_label.append(f'Impurity: ${subtree.impurity_score:.2f}$')
             if show_n_examples_by_label:
                 node_label.append('$[' + ', '.join(str(int(n)) for n in subtree.n_examples_by_label) + ']$')
             node_label = ' \\\\ '.join(node_label)
-            
-        color = '' 
+
+        color = ''
         pic += f'\\node[{style}, align=center](node{node}) at ({min_node_distance*subtree.position/2:.3f}, {-level_distance*subtree.depth:.3f}) {{{node_label}}};'
-        
+
         subtree.node_id = node
 
     for subtree in decision_tree.tree:
